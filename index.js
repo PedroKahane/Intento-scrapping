@@ -52,15 +52,15 @@ require('dotenv').config();
 
   //const screenshot4 = await page.screenshot({ path: 'captura4.png' });
 
-  await page.waitForSelector('a[href="comprar_producto_pedido.php?eNid=634"]', { timeout: 10000 });
+  await page.waitForSelector('a[class="but_medium2"]', { timeout: 10000 });
 
-  await page.click('a[href="comprar_producto_pedido.php?eNid=634"]');
+  await page.click('a[class="but_medium2"]');
 
   await page.waitForSelector('.but_medium2');
 
   //const screenshot5 = await page.screenshot({ path: 'captura5.png' });
 
-  await page.click('a[href="comprar_plano_general.php?eNid=634"]');
+  await page.click('a[class="but_medium2"]');
 
   await page.waitForSelector('svg');
 
@@ -72,7 +72,7 @@ require('dotenv').config();
     let elementosDisponibles = await page.$$('g.section.enabled');
     while(elementosDisponibles.length == 0){
       console.log(elementosDisponibles.length);
-      await page.waitForTimeout(1000); 
+      //await page.waitForTimeout(1000); 
       await page.reload();
       await page.waitForSelector('svg', { timeout: 10000 });
       elementosDisponibles = await page.$$('g.section.enabled');
@@ -105,7 +105,16 @@ require('dotenv').config();
       await page.waitForTimeout(1500);
       try {
         await page.click('.but_medium2');
-        i = 1
+        await page.waitForTimeout(5000);
+        const elemento = await page.$('#carrito');
+        if (!elemento){
+          console.log("Aparecio esto");
+          await page.click(".but_medium2gris")
+          await page.goBack();
+        } else {
+          i = 1
+        }
+        
       } catch (error) {
         console.log(error.message);
         console.log("No llegue a reservarla!");
