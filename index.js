@@ -14,13 +14,14 @@ require('dotenv').config();
 
   await page.goto('https://soysocia.bocajuniors.com.ar/');
   
-  const screenshot = await page.screenshot({ path: 'captura.png' });
+  //const screenshot = await page.screenshot({ path: 'captura.png' });
   await page.waitForSelector('a[onclick="javascript:login();"]');
 
   await page.click('a[onclick="javascript:login();"]')
 
   const loginTarget = await browser.waitForTarget(target => target.url().includes('login.jsp?'));
   const loginPage = await loginTarget.page();
+  await page.waitForTimeout(1500);
 
   const screenshot2 = await loginPage.screenshot({ path: 'captura2.png' });
 
@@ -34,11 +35,12 @@ require('dotenv').config();
     
   await page.waitForSelector('a[data-toggle="tooltip"]', { timeout: 10000 });
  
-  const screenshot3 = await page.screenshot({ path: 'captura3.png' });
+  //const screenshot3 = await page.screenshot({ path: 'captura3.png' });
+  await page.waitForTimeout(1500);
 
   await page.click('.popup_imagen_close');
 
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(2000);
   await page.waitForSelector('a[data-toggle="tooltip"]', { timeout: 10000 });
     await page.click('a[data-toggle="tooltip"]');
     
@@ -48,7 +50,7 @@ require('dotenv').config();
 
 
 
-  const screenshot4 = await page.screenshot({ path: 'captura4.png' });
+  //const screenshot4 = await page.screenshot({ path: 'captura4.png' });
 
   await page.waitForSelector('a[href="comprar_producto_pedido.php?eNid=634"]', { timeout: 10000 });
 
@@ -56,13 +58,13 @@ require('dotenv').config();
 
   await page.waitForSelector('.but_medium2');
 
-  const screenshot5 = await page.screenshot({ path: 'captura5.png' });
+  //const screenshot5 = await page.screenshot({ path: 'captura5.png' });
 
   await page.click('a[href="comprar_plano_general.php?eNid=634"]');
 
   await page.waitForSelector('svg');
 
-  const screenshot6 = await page.screenshot({ path: 'captura6.png' });
+  //const screenshot6 = await page.screenshot({ path: 'captura6.png' });
 
 
   var i= 0
@@ -123,12 +125,7 @@ require('dotenv').config();
 
 
 
-  await page.waitForTimeout(".but_medium2azul");
-  await page.waitForSelector('#btnReservar');
-  const selectElement = await page.$('#comboTarjeta');
-  await selectElement.select('option[data-tarjeta-nid="18"]');
-  await page.click('.but_medium2azul');
-  const screenshot9 = await page.screenshot({ path: 'captura9.png' });
+ 
 
 //await page.waitForNavigation();
 
